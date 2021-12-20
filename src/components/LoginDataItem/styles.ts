@@ -18,6 +18,8 @@ export const Container = styled(LinearGradient).attrs({
 
 export const PasswordButton = styled.TouchableOpacity``;
 
+export const CopyClipboardButton = styled.TouchableOpacity``;
+
 export const Icon = styled(Feather).attrs({
   size: 24,
 })`

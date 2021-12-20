@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import * as Clipboard from 'expo-clipboard';
 
 import {
   Container,
   PasswordButton,
+  CopyClipboardButton,
   Icon,
   PassData,
   Title,
@@ -44,8 +46,10 @@ export function LoginDataItem({
 
       {passIsVisible ? (
         <PassData>
-          <Title>{service_name}</Title>
-          <Password>{password}</Password>
+          <CopyClipboardButton onPress={() => Clipboard.setString(password)}>
+            <Title>{service_name}</Title>
+            <Password>{password}</Password>
+          </CopyClipboardButton>
         </PassData>
       ) : (
         <LoginData>
