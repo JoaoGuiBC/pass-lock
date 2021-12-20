@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
+import { Alert } from 'react-native';
 
 import { Header } from '../../components/Header';
 import { SearchBar } from '../../components/SearchBar';
@@ -54,6 +55,25 @@ export function Home() {
     }
   }
 
+  async function handleDeleteLogin(id: string) {
+    try {
+      const dataKey = '@passlock:logins';
+
+      const filteredData = data.filter((login) => login.id !== id);
+      const parsedFilteredData = JSON.stringify(filteredData);
+
+      await AsyncStorage.setItem(dataKey, parsedFilteredData);
+
+      setData(filteredData);
+      setSearchListData(filteredData);
+    } catch (_) {
+      Alert.alert(
+        'Erro',
+        'Não foi possivel deletar o login no momento, tente novamente mais tarde.'
+      );
+    }
+  }
+
   useFocusEffect(
     useCallback(() => {
       loadData();
@@ -93,9 +113,11 @@ export function Home() {
           renderItem={({ item: loginData }) => {
             return (
               <LoginDataItem
+                id={loginData.id}
                 service_name={loginData.service_name}
                 email={loginData.email}
                 password={loginData.password}
+                onDelete={handleDeleteLogin}
               />
             );
           }}

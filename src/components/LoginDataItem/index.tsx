@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import {
   Container,
-  ShowPasswordButton,
+  PasswordButton,
   Icon,
   PassData,
   Title,
@@ -13,12 +13,20 @@ import {
 } from './styles';
 
 interface Props {
+  id: string;
   service_name: string;
   email: string;
   password: string;
+  onDelete: (id: string) => Promise<void>;
 }
 
-export function LoginDataItem({ service_name, email, password }: Props) {
+export function LoginDataItem({
+  id,
+  service_name,
+  email,
+  password,
+  onDelete,
+}: Props) {
   const [passIsVisible, setPassIsVisible] = useState(false);
 
   function handleTogglePassIsVisible() {
@@ -27,12 +35,12 @@ export function LoginDataItem({ service_name, email, password }: Props) {
 
   return (
     <Container colors={[passIsVisible ? '#eee1ff' : '#ffffff', '#ffffff']}>
-      <ShowPasswordButton onPress={handleTogglePassIsVisible}>
+      <PasswordButton onPress={handleTogglePassIsVisible}>
         <Icon
           name={passIsVisible ? 'eye' : 'eye-off'}
           color={passIsVisible ? '#7719fb' : '#888D97'}
         />
-      </ShowPasswordButton>
+      </PasswordButton>
 
       {passIsVisible ? (
         <PassData>
@@ -45,6 +53,10 @@ export function LoginDataItem({ service_name, email, password }: Props) {
           <Email>{email}</Email>
         </LoginData>
       )}
+
+      <PasswordButton onPress={() => onDelete(id)}>
+        <Icon name="trash-2" color={passIsVisible ? '#7719fb' : '#888D97'} />
+      </PasswordButton>
     </Container>
   );
 }

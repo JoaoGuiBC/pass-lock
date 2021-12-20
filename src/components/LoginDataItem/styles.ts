@@ -16,7 +16,7 @@ export const Container = styled(LinearGradient).attrs({
   margin-bottom: 8px;
 `;
 
-export const ShowPasswordButton = styled.TouchableOpacity``;
+export const PasswordButton = styled.TouchableOpacity``;
 
 export const Icon = styled(Feather).attrs({
   size: 24,
@@ -26,7 +26,7 @@ export const Icon = styled(Feather).attrs({
 `;
 
 export const PassData = styled.View`
-  max-width: 243px;
+  flex: 1;
 `;
 
 export const Title = styled.Text`
@@ -43,7 +43,7 @@ export const Password = styled.Text`
 `;
 
 export const LoginData = styled.View`
-  max-width: 243px;
+  flex: 1;
 `;
 
 export const BoldTitle = styled.Text`
